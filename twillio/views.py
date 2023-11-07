@@ -107,4 +107,42 @@ def handle_intersection(response, instruction):
 
 def handle_curb(response):
     response.append()    
+def handle_curb(response):
+    response.append()  
+
+def handle_stairs(response):
+    response.append()  
+
+def handle_pedestrian_crosswalk(response):
+    response.append()  
+
+
+def handle_sidewalk_obstacle(response):
+    response.append()  
+
+def handle_elevator(response):
+    response.append()  
+
+def handle_escalator(response):
+    response.append()   
+
+def handle_street_corner(response):
+    response.append()  
+
+def  handle_public_transportation_stop(response):
+    response.append()  
+
+def  handle_pedestrian_signal(response):
+    response.append()  
+
+def handle_store_entrance(response):
+    response.append()    
+
+def handle_store_entrance(response):
+    response.append()   
+
+def  handle_crowded_area(response):
+    response.append()                             
+
+             
 
