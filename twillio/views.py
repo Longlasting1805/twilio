@@ -6,7 +6,7 @@ import requests
 from django.http import JsonResponse
 from twilio.twiml.voice_response import Dial, Gather, Play, Pause, Record, Redirect, Stream
 
-def handle_incoming_call(request):
+def handle_incoming_call(requests):
     # Retrieve user location from the request body
     user_location = json.loads(requests.body.decode('utf-8'))['userLocation']
 
@@ -15,6 +15,7 @@ def handle_incoming_call(request):
 
     # Initialize Twiml response
     response = Dial()
+    
 
 
 
@@ -22,26 +23,37 @@ def handle_incoming_call(request):
     for instruction in navigation_instructions:
         if instruction['type'] == 'intersection':
             handle_intersection(response, instruction)
+
         elif instruction['type'] == 'curb':
             handle_curb(response, instruction)
+
         elif instruction['type'] == 'stairs':
             handle_stairs(response, instruction)
+
         elif instruction['type'] == 'pedestrianCrosswalk':
             handle_pedestrian_crosswalk(response, instruction)
+
         elif instruction['type'] == 'sidewalkObstacle':
             handle_sidewalk_obstacle(response, instruction)
+
         elif instruction['type'] == 'elevator':
             handle_elevator(response, instruction)
+
         elif instruction['type'] == 'escalator':
             handle_escalator(response, instruction)
+
         elif instruction['type'] == 'streetCorner':
             handle_street_corner(response, instruction)
+
         elif instruction['type'] == 'publicTransportationStop':
             handle_public_transportation_stop(response, instruction)
+
         elif instruction['type'] == 'pedestrianSignal':
             handle_pedestrian_signal(response, instruction)
+
         elif instruction['type'] == 'storeEntrance':
             handle_store_entrance(response, instruction)
+            
         elif instruction['type'] == 'crowdedArea':
             handle_crowded_area(response, instruction)
 
@@ -104,6 +116,7 @@ def get_navigation_instructions(user_location):
 
 def handle_intersection(response, instruction):
     response.append(Play(audio_url='https://demo.twilio.com/docs/voice/tutorial/audio-prompts.xml'))
+    return 
 
 def handle_curb(response):
     response.append()    
