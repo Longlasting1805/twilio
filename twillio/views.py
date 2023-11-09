@@ -4,19 +4,27 @@ from django.shortcuts import render
 import json
 import requests
 from django.http import JsonResponse
-from twilio.twiml.voice_response import Dial, Gather, Play, Pause, Record, Redirect, Stream
+from twilio.twiml.voice_response import Dial, Gather, Play, Pause, Record, Redirect, Stream, VoiceResponse
 
 def handle_incoming_call(requests):
     # Retrieve user location from the request body
-    user_location = json.loads(requests.body.decode('utf-8'))['userLocation']
+    request_body = requests.body.decode('utf-8')
+    body = json.loads(request_body)
+
+    user_location = body.get(['user_location'])
+
 
     # Get navigation instructions using a mapping API
     navigation_instructions = get_navigation_instructions(user_location)
 
     # Initialize Twiml response
-    response = Dial()
-    
+    response = requests.get()
+    dial = Dial()
+    dial.number('+19099631070')
+    response.append(dial)
 
+    if (response.status_code == 200):
+        response = response.json()
 
 
     # Process navigation instructions and generate Twiml prompts
