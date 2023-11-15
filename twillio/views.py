@@ -6,25 +6,18 @@ import requests
 from django.http import JsonResponse
 from twilio.twiml.voice_response import Dial, Gather, Play, Pause, Record, Redirect, Stream, VoiceResponse
 
-def handle_incoming_call(requests):
+def handle_incoming_call(request):
     # Retrieve user location from the request body
-    request_body = requests.body.decode('utf-8')
-    body = json.loads(request_body)
-
-    user_location = body.get(['user_location'])
-
+    user_location = json.loads(request.body.decode('utf-8'))['userLocation']
 
     # Get navigation instructions using a mapping API
     navigation_instructions = get_navigation_instructions(user_location)
 
     # Initialize Twiml response
-    response = requests.get()
+    response = VoiceResponse()
     dial = Dial()
-    dial.number('+19099631070')
+    dial.number("+19099631070")
     response.append(dial)
-
-    if (response.status_code == 200):
-        response = response.json()
 
 
     # Process navigation instructions and generate Twiml prompts
